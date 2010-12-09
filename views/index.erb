@@ -1,0 +1,12 @@
+<h2>New Entries</h2>
+<table>
+<% if @agents.size > 0 %>
+<% @agents.each do |e| %>
+  <tr>
+    <td><%= e.entered.strftime("%Y-%m-%d %H:%M") rescue nil %></td>
+    <td><a href="/p/<%= e.owner %>/<%= e.name %>"><%= e.owner %>/<%= e.name %></a></td>
+    <td><a href="http://github.com/<%= e.owner %>/<%= e.name %>">(code)</a></td>      
+  </tr>
+<% end %>
+<% end %>
+</table>

@@ -17,6 +17,8 @@ class Agent
   property :url,         String
   property :description, String
   property :last_build,  Time
+  property :heartbeat,   Time
+  property :hidden,      Boolean
 
   def build
     builds.last
@@ -33,7 +35,7 @@ class Build
   property :sha,         String
   property :message,     String
   property :author,      String
-  property :output,      String
+  property :out,         Text
   property :built,       Time
 end
 
@@ -70,7 +72,6 @@ end
 # "message"=>"this is a commit"
 # }
 post '/update/:token' do
-  # TODO: verify token
   token = Token.first(:token => params[:token])
   if !token
     status 401 # unauthorized
@@ -78,30 +79,37 @@ post '/update/:token' do
   end
 
   push = JSON.parse(params[:data])
-  # pp push
+
+  is_build = false
+  if push['status']
+    is_build = true
+  end
 
   # select or add agent
   agent = Agent.first(:agent => push['agent'])
   agent = Agent.new if !agent
   agent.attributes = {
     :agent => push['agent'],
-    :url => push['url'],
     :description => push['description'],
-    :last_build => Time.now
+    :url => push['url'],
   }
+  agent.last_build => Time.now if is_build
+  agent.heartbeat => Time.now
   agent.save
 
-  # create new build
-  build = Build.new
-  build.agent = agent
-  build.branch  = push['branch']
-  build.status  = push['status']
-  build.sha     = push['sha']
-  build.message = push['message']
-  build.author  = push['author']
-  build.built   = Time.now
-  build.output  = push['output']
-  build.save
+  if is_build
+    # create new build
+    build = Build.new
+    build.agent = agent
+    build.branch  = push['branch']
+    build.status  = push['status']
+    build.sha     = push['sha']
+    build.message = push['message'].split("\n").first[0, 40]
+    build.author  = push['author']
+    build.built   = Time.now
+    build.out     = push['output']
+    build.save
+  end
 end
 
 def time_ago(to_time)

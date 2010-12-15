@@ -4,7 +4,10 @@
     <% build = a.build %>
     <div class="agent <%= build.status %>">
       <div class="atitle">
-        <div class="status"><%= build.branch %>:<strong><%= build.status %></strong></div>
+        <div class="status">
+          <small>hb:<%= time_ago(agent.heartbeat) %></small>
+          <%= build.branch %>:<strong><%= build.status %></strong>
+        </div>
         <a href="/agent/<%= a.agent %>"><%= a.agent %></a> 
         <span class="desc"><%= a.description %></span>
       </div>

@@ -1,5 +1,8 @@
 TODO
 * delete old builds (keep last 20ish)
+* heartbeat status
+* keep full output
+* last commit font smaller
 
 LATER
 * mark agents to disappear until next hit

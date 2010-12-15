@@ -1,29 +1,32 @@
 <h2 class="sub">Agent: <%= @agent.agent %></h2>
 
-<div class="agent">
+<div class="agentdetail">
   <% build = @agent.build %>
   <table>
     <tr>
-      <td>Branch</td>
-      <td><%= build.branch %></td>
-    </tr><tr>
-      <td>Status</td>
+      <th>Status</th>
       <td><%= build.status %></td>
     </tr><tr>
-      <td>SHA</td>
-      <td><%= build.sha %></td>
+      <th>Heartbeat</th>
+      <td><%= @agent.heartbeat %></td>
     </tr><tr>
-      <td>Commit Message</td>
+      <th>Branch</th>
+      <td><%= build.branch %></td>
+    </tr><tr>
+      <th>SHA</th>
+      <td><code><%= build.sha %></code></td>
+    </tr><tr>
+      <th>Commit Message</th>
       <td><%= build.message %></td>
     </tr><tr>
-      <td>Author</td>
+      <th>Author</th>
       <td><%= build.author %></td>
     </tr><tr>
-      <td>Output</td>
-      <td><pre><%= build.output %></pre></td>
+      <th>Built</th>
+      <td><%= build.built %></td>
     </tr><tr>
-      <td>Built</td>
-      <td><pre><%= build.built %></pre></td>
+      <th valign="top">Output</th>
+      <td><pre><%= build.out %></pre></td>
     </tr>
   </table>
 </div>

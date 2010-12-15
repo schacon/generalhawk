@@ -1,0 +1,5 @@
+sinatra
+dm-core
+dm-migrations
+dm-postgres-adapter
+json

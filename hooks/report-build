@@ -3,4 +3,5 @@
 require 'rubygems'
 require File.join(File.dirname(__FILE__), "hawk")
 
-Hawk.post('good')
+status = ARGV[0]
+Hawk.post(status)

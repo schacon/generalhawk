@@ -16,6 +16,7 @@ class Hawk
         "agent"       => config[:agent],
         "description" => config[:description],
         "branch"      => "master",
+        "author"      => author,
         "sha"         => sha,
         "status"      => status,
         "url"         => config[:url],

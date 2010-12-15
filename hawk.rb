@@ -37,6 +37,12 @@ class Build
   property :built,       Time
 end
 
+class Token
+  include DataMapper::Resource 
+  property :id,         Serial
+  property :token,      String, :key => true
+end
+
 DataMapper.auto_upgrade!
 
 ## -- WEBSITE STUFF --
@@ -48,11 +54,9 @@ end
 
 # get agent data
 get '/agent/:agent' do
-  @agent = Agent.first({:name => params[:agent]})
+  @agent = Agent.first({:agent => params[:agent]})
   erb :agent
 end
-
-# TODO: get build 
 
 #{
 # "agent"=>"test1",
@@ -67,9 +71,14 @@ end
 # }
 post '/update/:token' do
   # TODO: verify token
+  token = Token.first(:token => params[:token])
+  if !token
+    status 401 # unauthorized
+    return "nope"
+  end
 
   push = JSON.parse(params[:data])
-  pp push
+  # pp push
 
   # select or add agent
   agent = Agent.first(:agent => push['agent'])
@@ -93,8 +102,6 @@ post '/update/:token' do
   build.built   = Time.now
   build.output  = push['output']
   build.save
-
-  # TODO: return 200
 end
 
 def time_ago(to_time)

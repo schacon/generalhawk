@@ -1,0 +1,5 @@
+TODO
+* delete old builds (keep last 20ish)
+
+LATER
+* mark agents to disappear until next hit

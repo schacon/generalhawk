@@ -1,16 +1,29 @@
-<h2 class="sub">Agents</h2>
-<% if @agents.size > 0 %>
-  <% @agents.each do |a| %>
-    <div class="agent">
-      <h3><a href="/agent/<%= a.agent %>"><%= a.agent %></a><br/></h3>
-      <% build = a.build %>
-      <%= build.branch %><br/>
-      <%= build.status %><br/>
-      <%= build.sha %><br/>
-      <%= build.message %><br/>
-      <%= build.author %><br/>
-      <%= build.output %><br/>
-      <%= build.built%><br/>
-    </div>
-  <% end %>
-<% end %>
+<h2 class="sub">Agent: <%= @agent.agent %></h2>
+
+<div class="agent">
+  <% build = @agent.build %>
+  <table>
+    <tr>
+      <td>Branch</td>
+      <td><%= build.branch %></td>
+    </tr><tr>
+      <td>Status</td>
+      <td><%= build.status %></td>
+    </tr><tr>
+      <td>SHA</td>
+      <td><%= build.sha %></td>
+    </tr><tr>
+      <td>Commit Message</td>
+      <td><%= build.message %></td>
+    </tr><tr>
+      <td>Author</td>
+      <td><%= build.author %></td>
+    </tr><tr>
+      <td>Output</td>
+      <td><pre><%= build.output %></pre></td>
+    </tr><tr>
+      <td>Built</td>
+      <td><pre><%= build.built %></pre></td>
+    </tr>
+  </table>
+</div>

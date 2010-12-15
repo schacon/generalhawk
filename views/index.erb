@@ -3,11 +3,17 @@
   <% @agents.each do |a| %>
     <% build = a.build %>
     <div class="agent <%= build.status %>">
-      <h3><a href="/agent/<%= a.agent %>"><%= a.agent %></a><br/></h3>
-      <%= build.branch %>;
-      <%= build.status %>;
-      (<%= build.sha[0, 6] %>, <%= build.message %>, <%= build.author %>);
-      <%= time_ago(build.built) %><br/>
+      <div class="atitle">
+        <div class="status"><%= build.branch %>:<strong><%= build.status %></strong></div>
+        <a href="/agent/<%= a.agent %>"><%= a.agent %></a> 
+        <span class="desc"><%= a.description %></span>
+      </div>
+      <div class="info">
+        <div class="time">
+          <%= time_ago(build.built) %>
+        </div>
+        build: <code><a href="<%= a.url %>/commit/<%= build.sha %>"><%= build.sha[0, 6] rescue nil %></a>, <%= build.message %>, <%= build.author %></code>
+      </div>
     </div>
   <% end %>
 <% end %>

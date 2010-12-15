@@ -217,19 +217,27 @@ div.agent {
   background: #eee;
 }
 
-div.agent h3 {
+div.agent .atitle {
   background: #eee;
   padding: 3px;
 }
 
-div.good h3 {
+div.good .atitle {
   background: #8d8;
 }
 
-div.bad h3 {
+div.bad .atitle {
   background: #d88;
 }
 
-div.agent h3 a {
+div.agent .atitle a {
   color: #000;
+  font-weight: bold;
 }
+
+div.agent .atitle .desc {
+  margin-left: 10px;
+}
+
+div.status { float: right; }
+div.time { float: right; }

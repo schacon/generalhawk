@@ -1,0 +1,16 @@
+<h2 class="sub">Agents</h2>
+<% if @agents.size > 0 %>
+  <% @agents.each do |a| %>
+    <div class="agent">
+      <h3><a href="/agent/<%= a.agent %>"><%= a.agent %></a><br/></h3>
+      <% build = a.build %>
+      <%= build.branch %><br/>
+      <%= build.status %><br/>
+      <%= build.sha %><br/>
+      <%= build.message %><br/>
+      <%= build.author %><br/>
+      <%= build.output %><br/>
+      <%= build.built%><br/>
+    </div>
+  <% end %>
+<% end %>
